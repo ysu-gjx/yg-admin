@@ -6,7 +6,9 @@ module.exports = {
     // type 类型定义，表示 git 提交的 type 必须在以下类型范围内
     'type-enum': [
       2,
+      // 在什么情况下进行验证
       'always',
+      // 泛型内容
       [
         'feat', // 新功能 feature
         'fix', // 修复 bug
