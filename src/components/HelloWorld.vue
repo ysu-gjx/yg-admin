@@ -15,6 +15,7 @@ const { count } = storeToRefs(counterStore)
 function test() {
   console.log(test)
 }
+test()
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
