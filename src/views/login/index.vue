@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form">
+    <el-form class="login-form" :model="loginForm" :rules="loginRules">
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -51,11 +51,31 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import { validatePassword } from './rules'
 
+// 表单数据
 const loginForm = ref({
   username: '',
   password: ''
 })
+// 验证规则
+const loginRules = ref({
+  username: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: '用户名为必填项'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      trigger: 'blur',
+      validator: validatePassword()
+    }
+  ]
+})
+
 const loading = ref(false)
 const handleLogin = () => {}
 
