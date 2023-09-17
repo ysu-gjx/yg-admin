@@ -1,6 +1,11 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" :model="loginForm" :rules="loginRules">
+    <el-form
+      ref="formRef"
+      class="login-form"
+      :model="loginForm"
+      :rules="loginRules"
+    >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -50,13 +55,20 @@
   </div>
 </template>
 <script setup>
+import { useUserStore } from '@/store'
+
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { validatePassword } from './rules'
+
+const userStore = useUserStore()
+const router = useRouter()
+const formRef = ref(null)
 
 // 表单数据
 const loginForm = ref({
-  username: '',
-  password: ''
+  username: 'super-admin',
+  password: '123456'
 })
 // 验证规则
 const loginRules = ref({
@@ -77,7 +89,25 @@ const loginRules = ref({
 })
 
 const loading = ref(false)
-const handleLogin = () => {}
+const handleLogin = () => {
+  formRef.value.validate((valid) => {
+    if (!valid) {
+      return
+    }
+
+    loading.value = true
+    userStore
+      .loginAction(loginForm.value)
+      .then((res) => {
+        console.log(res)
+        // 登陆成功后跳转页面
+        router.push('/')
+      })
+      .finally(() => {
+        loading.value = false
+      })
+  })
+}
 
 const passwordType = ref('password')
 
