@@ -8,6 +8,9 @@ import SvgIconPlugin from '@/icons'
 
 import './styles/index.scss'
 
+// 登录鉴权
+import './permission'
+
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
