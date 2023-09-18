@@ -1,7 +1,7 @@
 // 用户相关  store
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
-import { login } from '@/api/sys'
+import { ref, computed } from 'vue'
+import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 // import router from '@/router'
 
@@ -9,9 +9,12 @@ export const useUserStore = defineStore(
   'user',
   () => {
     // state
-    const loginInfo = ref({})
+    const userInfo = ref({})
     const token = ref('')
     // getters
+    const hasUserInfo = computed(() => {
+      return JSON.stringify(userInfo.value) !== '{}'
+    })
 
     // actions
     const loginAction = (userInfo) => {
@@ -33,16 +36,23 @@ export const useUserStore = defineStore(
           })
       })
     }
+    // 获取用户信息
+    const getUserInfoAction = async () => {
+      const res = await getUserInfo()
+      userInfo.value = res
+    }
 
     const setToken = (val) => {
       token.value = val
     }
 
     return {
-      loginInfo,
+      userInfo,
+      hasUserInfo,
       token,
       loginAction,
-      setToken
+      setToken,
+      getUserInfoAction
     }
   },
   {
