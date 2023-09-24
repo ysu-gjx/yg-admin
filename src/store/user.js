@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
-// import router from '@/router'
+import router from '@/router'
+import { setTimeStamp } from '@/utils/auth'
 
 export const useUserStore = defineStore(
   'user',
@@ -29,6 +30,8 @@ export const useUserStore = defineStore(
             setToken(res.token)
             // 登录成功后 跳转页面
             // router.push('/')
+            // 登录后记录时间戳
+            setTimeStamp()
             resolve(res)
           })
           .catch((err) => {
@@ -46,13 +49,22 @@ export const useUserStore = defineStore(
       token.value = val
     }
 
+    const logoutAction = () => {
+      userInfo.value = {}
+      setToken('')
+      // TODO 清除权限
+
+      router.push('/login')
+    }
+
     return {
       userInfo,
       hasUserInfo,
       token,
       loginAction,
       setToken,
-      getUserInfoAction
+      getUserInfoAction,
+      logoutAction
     }
   },
   {

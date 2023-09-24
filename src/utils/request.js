@@ -2,6 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import md5 from 'md5'
 import { useUserStore } from '@/store'
+import { isCheckTimeout } from './auth'
 
 let userStore = null
 
@@ -18,16 +19,18 @@ instance.interceptors.request.use(
     }
     const { icode, time } = getTestICode()
     config.headers.icode = icode
+    // config.headers.icode = 'helloqianduanxunlianying'
     config.headers.codeType = time
     // 在这个位置需要统一的去注入token
     if (userStore.token) {
+      if (isCheckTimeout()) {
+        // 登出操作
+        userStore.logoutAction()
+        return Promise.reject(new Error('token 失效'))
+      }
+
       // 如果token存在 注入token
       config.headers.Authorization = `Bearer ${userStore.token}`
-      // if (isCheckTimeout()) {
-      //   // 登出操作
-      //   store.dispatch('user/logout')
-      //   return Promise.reject(new Error('token 失效'))
-      // }
     }
     // 配置接口国际化
     // config.headers['Accept-Language'] = store.getters.language
@@ -52,7 +55,14 @@ instance.interceptors.response.use(
     }
   },
   (error) => {
-    // TODO: 将来处理 token 超时问题
+    // *处理 token 超时问题
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      userStore.logoutAction()
+    }
     ElMessage.error(error.message) // 提示错误信息
     return Promise.reject(error)
   }

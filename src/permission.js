@@ -25,7 +25,6 @@ router.beforeEach(async (to, from, next) => {
       next('/')
     } else {
       // 判断是否有用户信息
-      console.log('hasUserInfo', hasUserInfo.value)
       if (!hasUserInfo.value) {
         await userStore.getUserInfoAction()
       }
