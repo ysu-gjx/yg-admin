@@ -1,7 +1,6 @@
 import { defineComponent } from 'vue'
 import { useUserStore } from '@/store'
 import { storeToRefs } from 'pinia'
-import { Setting } from '@element-plus/icons-vue'
 
 export default defineComponent({
   props: {},
@@ -40,10 +39,7 @@ export default defineComponent({
                   size={40}
                   src={userInfo.value.avatar}
                 ></el-avatar>
-                {/* <i class="el-icon-s-tools"></i> */}
-                <el-icon>
-                  <Setting />
-                </el-icon>
+                <svg-icon icon="setting"></svg-icon>
               </div>
             </el-dropdown>
           </div>

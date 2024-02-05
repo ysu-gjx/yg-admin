@@ -1,4 +1,4 @@
-import router from '@/router'
+// import router from '@/router'
 import { useUserStore } from '@/store'
 import { storeToRefs } from 'pinia'
 
@@ -13,7 +13,7 @@ const whiteList = ['/login']
  * @param {*} from
  * @param {*} next
  */
-router.beforeEach(async (to, from, next) => {
+const beforeEach = async (to, from, next) => {
   if (!userStore) {
     userStore = useUserStore()
   }
@@ -38,4 +38,7 @@ router.beforeEach(async (to, from, next) => {
       next('/login')
     }
   }
-})
+}
+
+// router.beforeEach(beforeEach)
+export default beforeEach

@@ -5,6 +5,7 @@ import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 import router from '@/router'
 import { setTimeStamp } from '@/utils/auth'
+import { removeAllItem } from '@/utils/storage'
 
 export const useUserStore = defineStore(
   'user',
@@ -52,6 +53,7 @@ export const useUserStore = defineStore(
     const logoutAction = () => {
       userInfo.value = {}
       setToken('')
+      removeAllItem()
       // TODO 清除权限
 
       router.push('/login')
