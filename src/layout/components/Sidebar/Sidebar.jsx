@@ -1,40 +1,63 @@
-import { defineComponent } from 'vue'
-import { Location } from '@element-plus/icons-vue'
+import { defineComponent, computed } from 'vue'
+import MenuItem from './MenuItem.vue'
+import { useCssVarStore } from '@/store'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
+  props: {
+    menu: {
+      type: Array,
+      required: true
+    }
+  },
   setup(props, ctx) {
+    const route = useRoute()
+    const cssVarStore = useCssVarStore()
+    const activeMenu = computed(() => route.path)
+    const renderMenu = (routes) => {
+      return routes.map((route) => {
+        if (route.children && route.children.length) {
+          return (
+            <el-sub-menu index={route.path}>
+              {{
+                title: () => (
+                  <MenuItem
+                    title={route.meta.title}
+                    icon={route.meta.icon}
+                    iconName={route.meta.iconName}
+                  />
+                ),
+                default: () => renderMenu(route.children)
+              }}
+            </el-sub-menu>
+          )
+        }
+        return (
+          <el-menu-item index={route.path}>
+            {{
+              default: () => (
+                <MenuItem
+                  title={route.meta.title}
+                  icon={route.meta.icon}
+                  iconName={route.meta.iconName}
+                />
+              )
+            }}
+          </el-menu-item>
+        )
+      })
+    }
     return () => {
       return (
         <el-menu
-          text-color="#fff"
-          active-text-color="#ffd04b"
-          background-color="#545c64"
+          text-color={cssVarStore.cssVar.menuText}
+          active-text-color={cssVarStore.cssVar.menuActiveText}
+          background-color={cssVarStore.cssVar.menuBg}
           unique-opened={true}
+          router
+          default-active={activeMenu.value}
         >
-          <el-sub-menu index="1">
-            {{
-              title: () => [
-                <el-icon>
-                  <Location />
-                </el-icon>,
-                <span>Navigator One</span>
-              ],
-              default: () => [
-                <el-menu-item index="1-1">item one</el-menu-item>,
-                <el-menu-item index="1-2">item two</el-menu-item>
-              ]
-            }}
-          </el-sub-menu>
-          <el-menu-item index="2">
-            {{
-              title: () => [
-                <el-icon>
-                  <Location />
-                </el-icon>,
-                <span>Navigator 2</span>
-              ]
-            }}
-          </el-menu-item>
+          {renderMenu(props.menu)}
         </el-menu>
       )
     }

@@ -47,7 +47,7 @@ const publicRoutes = [
           import(/* webpackChunkName: "profile" */ '@/views/profile/index'),
         meta: {
           title: 'profile',
-          icon: 'el-icon-user'
+          icon: 'personnel'
         }
       },
       {

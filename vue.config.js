@@ -16,6 +16,17 @@ module.exports = defineConfig({
     }
   },
   chainWebpack(config) {
+    config.plugin('define').tap((args) => {
+      args[0] = Object.assign(args[0], {
+        // __VUE_I18N_FULL_INSTALL__: true,
+        // __VUE_I18N_LEGACY_API__: true,
+        // __INTLIFY_PROD_DEVTOOLS__: false,
+        // __VUE_OPTIONS_API__: 'true',
+        // __VUE_PROD_DEVTOOLS__: false,
+        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
+      })
+      return args
+    })
     // 设置 svg-sprite-loader
     config.module.rule('svg').exclude.add(resolve('src/icons')).end()
     config.module

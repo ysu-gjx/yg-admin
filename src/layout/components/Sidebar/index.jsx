@@ -9,10 +9,9 @@ export default defineComponent({
     const router = useRouter()
     const fRoutes = filterRoutes(router.getRoutes())
     const menu = generateMenu(fRoutes)
-    console.log('fRoutes', fRoutes, menu)
 
     return () => {
-      return <Sidebar />
+      return <Sidebar menu={menu} />
     }
   }
 })

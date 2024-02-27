@@ -10,10 +10,15 @@ import './styles/index.scss'
 
 // 登录鉴权
 import './permission'
+import * as EleIcons from '@element-plus/icons-vue'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
 const app = createApp(App)
+
+for (const name in EleIcons) {
+  app.component(name, EleIcons[name])
+}
 
 app.use(pinia).use(ElementPlugin).use(SvgIconPlugin).use(router).mount('#app')
