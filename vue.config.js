@@ -7,6 +7,14 @@ function resolve(dir) {
 }
 module.exports = defineConfig({
   transpileDependencies: true,
+  configureWebpack: {
+    resolve: {
+      fallback: {
+        path: require.resolve('path-browserify')
+        // 其他需要的核心模块
+      }
+    }
+  },
   chainWebpack(config) {
     // 设置 svg-sprite-loader
     config.module.rule('svg').exclude.add(resolve('src/icons')).end()

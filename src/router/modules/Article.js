@@ -8,7 +8,7 @@ export default {
   meta: { title: 'article', icon: 'article' },
   children: [
     {
-      path: 'ranking',
+      path: '/article/ranking',
       component: () =>
         import(
           /* webpackChunkName: "article-ranking" */ '@/views/article-ranking/index'
@@ -19,7 +19,7 @@ export default {
       }
     },
     {
-      path: ':id',
+      path: '/article/:id',
       component: () =>
         import(
           /* webpackChunkName: "article-ranking" */ '@/views/article-detail/index'

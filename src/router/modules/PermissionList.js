@@ -8,7 +8,7 @@ export default {
   meta: { title: 'user', icon: 'personnel' },
   children: [
     {
-      path: 'permission',
+      path: '/user/permission',
       component: () =>
         import(
           /* webpackChunkName: "permission-list" */ '@/views/permission-list/index'

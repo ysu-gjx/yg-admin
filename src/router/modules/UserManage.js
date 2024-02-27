@@ -1,27 +1,28 @@
-import Layout from '@/layout'
+import layout from '@/layout'
 
 export default {
   path: '/user',
-  name: 'user',
+  component: layout,
   redirect: '/user/manage',
-  component: Layout,
+  name: 'userManage',
   meta: {
     title: 'user',
     icon: 'personnel'
   },
   children: [
     {
-      path: 'manage',
-      name: 'userManage',
+      path: '/user/manage',
       component: () =>
-        import(/* webpackChunkName: "user-manage" */ '@/views/user-manage'),
+        import(
+          /* webpackChunkName: "user-manage" */ '@/views/user-manage/index'
+        ),
       meta: {
         title: 'userManage',
         icon: 'personnel-manage'
       }
     },
     {
-      path: 'info/:id',
+      path: '/user/info/:id',
       name: 'userInfo',
       component: () =>
         import(/* webpackChunkName: "user-manage" */ '@/views/user-info/index'),
@@ -31,7 +32,7 @@ export default {
       }
     },
     {
-      path: 'import',
+      path: '/user/import',
       name: 'import',
       component: () =>
         import(/* webpackChunkName: "user-manage" */ '@/views/import/index'),
