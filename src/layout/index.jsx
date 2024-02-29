@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import Sidebar from './components/Sidebar'
 import NavBar from './components/NavBar'
 import AppMain from './components/AppMain'
-
+import { useCommonStore } from '@/store'
 import variables from '@/styles/variables.module.scss'
 
 import './index.scss'
@@ -16,10 +16,14 @@ export default defineComponent({
   },
   props: {},
   setup(props) {
+    const commonStore = useCommonStore()
     console.log('variables', variables)
     return () => {
       return (
-        <div class="app-wrapper">
+        <div
+          class="app-wrapper"
+          className={commonStore.sidebarOpened ? 'openSidebar' : 'hideSidebar'}
+        >
           {/* 左侧 menu */}
           <sidebar
             id="guide-sidebar"

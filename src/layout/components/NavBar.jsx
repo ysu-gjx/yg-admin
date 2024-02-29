@@ -1,6 +1,8 @@
 import { defineComponent } from 'vue'
 import { useUserStore } from '@/store'
 import { storeToRefs } from 'pinia'
+import Hamburger from '@/components/Hamburger'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default defineComponent({
   props: {},
@@ -26,6 +28,8 @@ export default defineComponent({
       }
       return (
         <div class="navbar">
+          <Hamburger class="hamburger-container" />
+          <Breadcrumb class="breadcrumb-container" />
           <div className="right-menu">
             {/* 头像 */}
             <el-dropdown

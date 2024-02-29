@@ -1,18 +1,18 @@
 import { defineComponent, computed } from 'vue'
 import MenuItem from './MenuItem.vue'
-import { useCssVarStore } from '@/store'
-import { useRoute } from 'vue-router'
+import { useCssVarStore, useCommonStore } from '@/store'
+import { useRoute, useRouter } from 'vue-router'
+import { filterRoutes, generateMenu } from '@/utils/route'
 
 export default defineComponent({
-  props: {
-    menu: {
-      type: Array,
-      required: true
-    }
-  },
+  props: {},
   setup(props, ctx) {
+    const router = useRouter()
+    const fRoutes = filterRoutes(router.getRoutes())
+    const menu = generateMenu(fRoutes)
     const route = useRoute()
     const cssVarStore = useCssVarStore()
+    const commonStore = useCommonStore()
     const activeMenu = computed(() => route.path)
     const renderMenu = (routes) => {
       return routes.map((route) => {
@@ -50,6 +50,7 @@ export default defineComponent({
     return () => {
       return (
         <el-menu
+          collapse={!commonStore.sidebarOpened}
           text-color={cssVarStore.cssVar.menuText}
           active-text-color={cssVarStore.cssVar.menuActiveText}
           background-color={cssVarStore.cssVar.menuBg}
@@ -57,7 +58,7 @@ export default defineComponent({
           router
           default-active={activeMenu.value}
         >
-          {renderMenu(props.menu)}
+          {renderMenu(menu)}
         </el-menu>
       )
     }
