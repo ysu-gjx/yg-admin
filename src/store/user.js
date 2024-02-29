@@ -1,17 +1,22 @@
 // 用户相关  store
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
-import { login } from '@/api/sys'
+import { ref, computed } from 'vue'
+import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
-// import router from '@/router'
+import router from '@/router'
+import { setTimeStamp } from '@/utils/auth'
+import { removeAllItem } from '@/utils/storage'
 
 export const useUserStore = defineStore(
   'user',
   () => {
     // state
-    const loginInfo = ref({})
+    const userInfo = ref({})
     const token = ref('')
     // getters
+    const hasUserInfo = computed(() => {
+      return JSON.stringify(userInfo.value) !== '{}'
+    })
 
     // actions
     const loginAction = (userInfo) => {
@@ -26,6 +31,8 @@ export const useUserStore = defineStore(
             setToken(res.token)
             // 登录成功后 跳转页面
             // router.push('/')
+            // 登录后记录时间戳
+            setTimeStamp()
             resolve(res)
           })
           .catch((err) => {
@@ -33,16 +40,33 @@ export const useUserStore = defineStore(
           })
       })
     }
+    // 获取用户信息
+    const getUserInfoAction = async () => {
+      const res = await getUserInfo()
+      userInfo.value = res
+    }
 
     const setToken = (val) => {
       token.value = val
     }
 
+    const logoutAction = () => {
+      userInfo.value = {}
+      setToken('')
+      removeAllItem()
+      // TODO 清除权限
+
+      router.push('/login')
+    }
+
     return {
-      loginInfo,
+      userInfo,
+      hasUserInfo,
       token,
       loginAction,
-      setToken
+      setToken,
+      getUserInfoAction,
+      logoutAction
     }
   },
   {
