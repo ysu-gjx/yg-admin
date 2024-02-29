@@ -7,7 +7,8 @@
       :rules="loginRules"
     >
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{ $t('msg.login.title') }}</h3>
+        <LangSelect class="lang-select" effect="light" />
       </div>
 
       <!-- username -->
@@ -49,18 +50,22 @@
         style="width: 100%; margin-bottom: 30px"
         :loading="loading"
         @click="handleLogin"
-        >登录</el-button
+        >{{ $t('msg.login.loginBtn') }}</el-button
       >
+      <div class="tips" v-html="$t('msg.login.desc')"></div>
     </el-form>
   </div>
 </template>
 <script setup>
 import { useUserStore } from '@/store'
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { validatePassword } from './rules'
+import { useI18n } from 'vue-i18n'
+import LangSelect from '@/components/LangSelect'
 
+const { t } = useI18n()
 const userStore = useUserStore()
 const router = useRouter()
 const formRef = ref(null)
@@ -76,7 +81,7 @@ const loginRules = ref({
     {
       required: true,
       trigger: 'blur',
-      message: '用户名为必填项'
+      message: computed(() => t('msg.login.usernameRule'))
     }
   ],
   password: [
