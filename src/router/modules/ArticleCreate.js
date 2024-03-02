@@ -27,6 +27,16 @@ export default {
       meta: {
         title: 'articleEditor'
       }
+    },
+    {
+      path: '/article/code',
+      component: () =>
+        import(
+          /* webpackChunkName: "article-create" */ '@/views/editors/CodeEditor'
+        ),
+      meta: {
+        title: 'codeEditor'
+      }
     }
   ]
 }
