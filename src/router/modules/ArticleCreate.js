@@ -29,13 +29,33 @@ export default {
       }
     },
     {
-      path: '/article/code',
+      path: '/article/json2Ts',
       component: () =>
         import(
           /* webpackChunkName: "article-create" */ '@/views/editors/CodeEditor'
         ),
       meta: {
+        title: 'jsonToTs'
+      }
+    },
+    {
+      path: '/article/code',
+      component: () =>
+        import(
+          /* webpackChunkName: "article-create" */ '@/views/editors/CodeEditor2'
+        ),
+      meta: {
         title: 'codeEditor'
+      }
+    },
+    {
+      path: '/article/byteMd',
+      component: () =>
+        import(
+          /* webpackChunkName: "article-create" */ '@/views/editors/MdEditorView'
+        ),
+      meta: {
+        title: 'byteMd'
       }
     }
   ]

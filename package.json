@@ -8,11 +8,17 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@bytemd/plugin-gfm": "^1.21.0",
+    "@bytemd/plugin-highlight": "^1.21.0",
+    "@bytemd/vue-next": "^1.21.0",
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
     "element-plus": "^2.5.6",
+    "json_typegen_wasm": "^0.7.0",
     "md5": "^2.3.0",
+    "monaco-editor": "^0.46.0",
+    "monaco-editor-webpack-plugin": "^7.1.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.4",
     "pinia-plugin-persistedstate": "^3.1.0",

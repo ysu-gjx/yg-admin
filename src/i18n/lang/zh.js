@@ -31,7 +31,10 @@ export default {
     articleRanking: '文章排名',
     articleCreate: '创建文章',
     articleDetail: '文章详情',
-    articleEditor: '文章编辑'
+    articleEditor: '文章编辑',
+    jsonToTs: 'Json 转 Ts',
+    codeEditor: 'Code 编辑器',
+    byteMd: 'Markdown 编辑器'
   },
   toast: {
     switchLangSuccess: '切换语言成功'

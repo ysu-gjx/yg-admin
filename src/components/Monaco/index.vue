@@ -69,7 +69,8 @@ const mode = {
   html: 'html',
   js: 'javascript',
   json: 'json',
-  css: 'css'
+  css: 'css',
+  ts: 'typescript'
 }
 const updateValue = () => {
   try {
@@ -84,6 +85,7 @@ const updateValue = () => {
   }
 }
 const setEditorValue = (strCode) => {
+  console.log('mode[props.type]', mode[props.type])
   jsonEditor = monaco.editor.create(document.getElementById(props.editorId), {
     value: strCode,
     theme: 'vs-dark',
@@ -138,7 +140,8 @@ watchEffect(() => {
 
 defineExpose({
   onOpen,
-  beautifierConf
+  beautifierConf,
+  updateEditorValue
 })
 </script>
 

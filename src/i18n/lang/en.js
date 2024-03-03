@@ -31,7 +31,10 @@ export default {
     articleRanking: 'ArticleRanking',
     articleCreate: 'ArticleCreate',
     articleDetail: 'ArticleDetail',
-    articleEditor: 'ArticleEditor'
+    articleEditor: 'ArticleEditor',
+    jsonToTs: 'JsonToTs',
+    codeEditor: 'CodeEditor',
+    byteMd: 'MarkdownEditor'
   },
   toast: {
     switchLangSuccess: 'Switch Language Success'

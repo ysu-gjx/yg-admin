@@ -14,7 +14,7 @@ function loadScript(src, callback) {
     $script.src = src
     $script.id = src
     $script.async = 1
-    $script.type = 'text/javascript'
+    // $script.type = 'text/javascript'
     document.body.appendChild($script)
     // eslint-disable-next-line no-use-before-define
     const onEnd =

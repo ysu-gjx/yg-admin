@@ -1,6 +1,7 @@
 const path = require('path')
 
 const { defineConfig } = require('@vue/cli-service')
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -8,6 +9,9 @@ function resolve(dir) {
 module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack: {
+    experiments: {
+      asyncWebAssembly: true
+    },
     resolve: {
       fallback: {
         path: require.resolve('path-browserify')
@@ -48,6 +52,9 @@ module.exports = defineConfig({
       .type('javascript/auto')
       .include.add(/node_modules/)
       .end()
+
+    config.output.webassemblyModuleFilename = 'static/wasm/[modulehash].wasm'
+    config.plugin('monaco').use(new MonacoWebpackPlugin())
   },
   devServer: {
     // 配置反向代理
