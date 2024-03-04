@@ -5,6 +5,7 @@ import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import LangSelect from '@/components/LangSelect'
 import { useI18n } from 'vue-i18n'
+import ThemePicker from '@/components/ThemeSelect'
 
 export default defineComponent({
   props: {},
@@ -34,6 +35,7 @@ export default defineComponent({
           <Hamburger class="hamburger-container" />
           <Breadcrumb class="breadcrumb-container" />
           <div className="right-menu">
+            <ThemePicker class="right-menu-item hover-effect" />
             <LangSelect class="right-menu-item hover-effect" />
             {/* 头像 */}
             <el-dropdown
