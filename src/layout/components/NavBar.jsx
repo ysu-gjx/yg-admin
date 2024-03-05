@@ -6,6 +6,7 @@ import Breadcrumb from '@/components/Breadcrumb'
 import LangSelect from '@/components/LangSelect'
 import { useI18n } from 'vue-i18n'
 import ThemePicker from '@/components/ThemeSelect'
+import Screenfull from '@/components/Screenfull'
 
 export default defineComponent({
   props: {},
@@ -35,6 +36,7 @@ export default defineComponent({
           <Hamburger class="hamburger-container" />
           <Breadcrumb class="breadcrumb-container" />
           <div className="right-menu">
+            <Screenfull class="right-menu-item hover-effect" />
             <ThemePicker class="right-menu-item hover-effect" />
             <LangSelect class="right-menu-item hover-effect" />
             {/* 头像 */}
