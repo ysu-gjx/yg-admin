@@ -2,8 +2,7 @@ import { defineComponent } from 'vue'
 import Sidebar from './components/Sidebar'
 import NavBar from './components/NavBar'
 import AppMain from './components/AppMain'
-import { useCommonStore } from '@/store'
-import variables from '@/styles/variables.module.scss'
+import { useCommonStore, useCssVarStore } from '@/store'
 
 import './index.scss'
 
@@ -17,7 +16,8 @@ export default defineComponent({
   props: {},
   setup(props) {
     const commonStore = useCommonStore()
-    console.log('variables', variables)
+    const cssVarStore = useCssVarStore()
+
     return () => {
       return (
         <div
@@ -28,7 +28,7 @@ export default defineComponent({
           <sidebar
             id="guide-sidebar"
             class="sidebar-container"
-            style={{ backgroundColor: variables.menuBg }}
+            style={{ backgroundColor: cssVarStore.cssVar.menuBg }}
           />
           <div class="main-container">
             <div className="fixed-header">

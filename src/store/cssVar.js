@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
 import { computed } from 'vue'
-import variables from '@/styles/variables.module.scss'
+import { useThemeStore } from './theme'
 
 export const useCssVarStore = defineStore('cssVar', () => {
-  const cssVar = computed(() => variables)
+  const themeStore = useThemeStore()
+  const cssVar = computed(() => themeStore.theme)
 
   return {
     cssVar

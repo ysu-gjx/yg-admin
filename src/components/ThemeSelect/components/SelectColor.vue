@@ -18,6 +18,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useThemeStore } from '@/store'
+import { generateNewStyle, writeNewStyle } from '@/utils/theme'
 
 const themeStore = useThemeStore()
 
@@ -62,7 +63,15 @@ const mainColor = ref(themeStore.mainColor)
 const close = () => {
   visible.value = false
 }
-const handleConfirm = () => {
+/**
+ * 确定
+ * 1. 修改主题色
+ * 2. 保存最新的主题色
+ * 3. 关闭 dialog
+ */
+const handleConfirm = async () => {
+  const newStyle = await generateNewStyle(mainColor.value)
+  writeNewStyle(newStyle)
   themeStore.setMainColor(mainColor.value)
   close()
 }
