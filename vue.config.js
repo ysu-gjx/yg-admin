@@ -57,6 +57,9 @@ module.exports = defineConfig({
     config.plugin('monaco').use(new MonacoWebpackPlugin())
   },
   devServer: {
+    client: {
+      overlay: false
+    },
     // 配置反向代理
     proxy: {
       // 当地址中有/api的时候会触发代理机制
