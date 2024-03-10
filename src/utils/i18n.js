@@ -10,7 +10,7 @@ export const generateTitle = (title) => {
  * @param  {...any} cbs 所有的回调
  */
 
-export const switchLanguage = (...cbs) => {
+export const watchSwitchLang = (...cbs) => {
   const commonStore = useCommonStore()
   watch(
     () => commonStore.language,

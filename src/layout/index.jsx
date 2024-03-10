@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar'
 import NavBar from './components/NavBar'
 import AppMain from './components/AppMain'
 import { useCommonStore, useCssVarStore } from '@/store'
+import TagsView from '@/components/TagsView'
 
 import './index.scss'
 
@@ -34,6 +35,7 @@ export default defineComponent({
             <div className="fixed-header">
               {/* 顶部导航栏 */}
               <nav-bar />
+              <TagsView />
             </div>
             {/* 内容区 */}
             <app-main />

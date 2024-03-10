@@ -58,7 +58,7 @@ module.exports = defineConfig({
   },
   devServer: {
     client: {
-      overlay: false
+      overlay: false //
     },
     // 配置反向代理
     proxy: {

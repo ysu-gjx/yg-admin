@@ -31,7 +31,7 @@ import { filterRoutes } from '@/utils/route'
 import { useRouter } from 'vue-router'
 import Fuse from 'fuse.js'
 import { generateRoutes } from './FuseData'
-import { switchLanguage } from '@/utils/i18n'
+import { watchSwitchLang } from '@/utils/i18n'
 
 const router = useRouter()
 const isShow = ref(false)
@@ -101,6 +101,7 @@ watch(isShow, (val) => {
 })
 
 const onSelectChange = async (val) => {
+  // await router.push(val.path)
   router.push(val.path)
   // 用个定时器减少 重绘报错 -- el-select
   // setTimeout(() => {
@@ -108,7 +109,7 @@ const onSelectChange = async (val) => {
   // }, 400)
 }
 
-switchLanguage(() => {
+watchSwitchLang(() => {
   searchPool = computed(() => {
     const fRoutes = filterRoutes(router.getRoutes())
     return generateRoutes(fRoutes)
