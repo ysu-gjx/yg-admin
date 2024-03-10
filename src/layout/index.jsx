@@ -35,7 +35,7 @@ export default defineComponent({
             <div className="fixed-header">
               {/* 顶部导航栏 */}
               <nav-bar />
-              <TagsView />
+              <TagsView id="guide-tags" />
             </div>
             {/* 内容区 */}
             <app-main />

@@ -8,6 +8,7 @@ import { useI18n } from 'vue-i18n'
 import ThemePicker from '@/components/ThemeSelect'
 import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
+import Guide from '@/components/Guide'
 
 export default defineComponent({
   props: {},
@@ -35,8 +36,9 @@ export default defineComponent({
       return (
         <div class="navbar">
           <Hamburger class="hamburger-container" />
-          <Breadcrumb class="breadcrumb-container" />
+          <Breadcrumb class="breadcrumb-container" id="guide-breadcrumb" />
           <div className="right-menu">
+            <Guide class="right-menu-item hover-effect" />
             <HeaderSearch class="right-menu-item hover-effect" />
             <Screenfull class="right-menu-item hover-effect" />
             <ThemePicker class="right-menu-item hover-effect" />
