@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import md5 from 'md5'
-import { useUserStore } from '@/store'
+import { useUserStore, useCommonStore } from '@/store'
 import { isCheckTimeout } from './auth'
 
 let userStore = null
+let commonStore = null
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -16,6 +17,9 @@ instance.interceptors.request.use(
   (config) => {
     if (userStore === null) {
       userStore = useUserStore()
+    }
+    if (commonStore === null) {
+      commonStore = useCommonStore()
     }
     const { icode, time } = getTestICode()
     config.headers.icode = icode
@@ -33,7 +37,7 @@ instance.interceptors.request.use(
       config.headers.Authorization = `Bearer ${userStore.token}`
     }
     // 配置接口国际化
-    // config.headers['Accept-Language'] = store.getters.language
+    config.headers['Accept-Language'] = commonStore.language
     return config // 必须返回配置
   },
   (error) => {
