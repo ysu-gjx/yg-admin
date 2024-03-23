@@ -6,6 +6,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import ElementPlugin from './plugins/element'
 import SvgIconPlugin from '@/icons'
 import i18n from '@/i18n'
+import installFilter from '@/filters'
 
 import './styles/index.scss'
 
@@ -17,6 +18,8 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
 const app = createApp(App)
+
+installFilter(app)
 
 for (const name in EleIcons) {
   app.component(name, EleIcons[name])
