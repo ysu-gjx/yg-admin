@@ -64,13 +64,12 @@
 import PanThumb from '@/components/PanThumb/index.vue'
 import { useUserStore } from '@/store'
 
-const props = defineProps({
+defineProps({
   features: {
     type: Array,
     required: true
   }
 })
-console.log(props)
 
 const userStore = useUserStore()
 </script>
