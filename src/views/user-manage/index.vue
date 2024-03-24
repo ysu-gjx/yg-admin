@@ -43,6 +43,7 @@
     </el-card>
 
     <Export2Excel v-model="exportToExcelVisible" />
+    <Roles v-model="rolesVisible" :userId="userId" @updateRole="updateRole" />
   </div>
 </template>
 <script setup lang="jsx">
@@ -54,6 +55,7 @@ import { dateFilter } from '@/filters'
 import { useRouter } from 'vue-router'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import Export2Excel from './components/Export2Excel.vue'
+import Roles from './components/roles.vue'
 
 const { t } = useI18n()
 // 数据相关
@@ -171,7 +173,17 @@ const onImportExcelClick = () => {
 const onShowClick = (id) => {
   router.push(`/user/info/${id}`)
 }
-const onShowRoleClick = () => {}
+// 角色分配
+const rolesVisible = ref(false)
+const userId = ref('')
+const onShowRoleClick = (row) => {
+  userId.value = row._id
+  rolesVisible.value = true
+}
+const updateRole = () => {
+  getTableData()
+  userId.value = ''
+}
 const onRemoveClick = (row) => {
   ElMessageBox.confirm(
     t('msg.excel.dialogTitle1') + row.username + t('msg.excel.dialogTitle2'),
