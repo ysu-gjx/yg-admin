@@ -17,3 +17,17 @@ export const userBatchImport = (params) => {
 export const deleteUser = (id) => {
   return request.get(`/user-manage/detele/${id}`)
 }
+
+/**
+ * 获取所有用户列表数据
+ */
+export const getUserManageAllList = () => {
+  return request.get('/user-manage/all-list')
+}
+
+/**
+ * 获取用户详情
+ */
+export const userDetail = (id) => {
+  return request.get(`/user-manage/detail/${id}`)
+}

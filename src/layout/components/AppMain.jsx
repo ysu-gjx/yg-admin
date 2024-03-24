@@ -1,4 +1,4 @@
-import { defineComponent, watch, Transition, KeepAlive } from 'vue'
+import { defineComponent, watch, Transition, KeepAlive, h } from 'vue'
 import { ElTooltip } from 'element-plus'
 import { useCommonStore } from '@/store'
 import { useRoute } from 'vue-router'
@@ -61,7 +61,9 @@ export default defineComponent({
             {{
               default: (scope) => (
                 <Transition name="fade-transform" mode="out-in">
-                  <KeepAlive>{scope.Component}</KeepAlive>
+                  <KeepAlive>
+                    {h(scope.Component, { key: route.path })}
+                  </KeepAlive>
                 </Transition>
               )
             }}

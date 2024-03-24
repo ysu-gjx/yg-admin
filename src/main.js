@@ -7,6 +7,7 @@ import ElementPlugin from './plugins/element'
 import SvgIconPlugin from '@/icons'
 import i18n from '@/i18n'
 import installFilter from '@/filters'
+import installDirective from '@/directives'
 
 import './styles/index.scss'
 
@@ -20,6 +21,7 @@ pinia.use(piniaPluginPersistedstate)
 const app = createApp(App)
 
 installFilter(app)
+installDirective(app)
 
 for (const name in EleIcons) {
   app.component(name, EleIcons[name])
