@@ -5,14 +5,14 @@ import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 import router from '@/router'
 import { setTimeStamp } from '@/utils/auth'
-import { removeAllItem } from '@/utils/storage'
+import { removeAllItem, getItem, setItem } from '@/utils/storage'
 
 export const useUserStore = defineStore(
   'user',
   () => {
     // state
     const userInfo = ref({})
-    const token = ref('')
+    const token = ref(getItem('token') || '')
     // getters
     const hasUserInfo = computed(() => {
       return JSON.stringify(userInfo.value) !== '{}'
@@ -44,17 +44,26 @@ export const useUserStore = defineStore(
     const getUserInfoAction = async () => {
       const res = await getUserInfo()
       userInfo.value = res
+
+      return res
     }
 
     const setToken = (val) => {
       token.value = val
+      setItem('token', val)
     }
 
     const logoutAction = () => {
+      // TODO 清除权限
+      if (userInfo.value?.permission?.menus) {
+        const menus = userInfo.value.permission.menus
+        menus.forEach((menu) => {
+          router.removeRoute(menu)
+        })
+      }
       userInfo.value = {}
       setToken('')
       removeAllItem()
-      // TODO 清除权限
 
       router.push('/login')
     }
@@ -70,6 +79,6 @@ export const useUserStore = defineStore(
     }
   },
   {
-    persist: true
+    // persist: true
   }
 )

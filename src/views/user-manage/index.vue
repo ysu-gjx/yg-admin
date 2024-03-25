@@ -3,7 +3,11 @@
     <!--  -->
     <el-card class="header">
       <div>
-        <el-button type="primary" @click="onImportExcelClick">
+        <el-button
+          type="primary"
+          @click="onImportExcelClick"
+          v-permission="['importUser']"
+        >
           {{ $t('msg.excel.importExcel') }}</el-button
         >
         <el-button type="success" @click="onToExcelClick">
