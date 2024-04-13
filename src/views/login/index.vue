@@ -104,7 +104,6 @@ const handleLogin = () => {
     userStore
       .loginAction(loginForm.value)
       .then((res) => {
-        console.log(res)
         // 登陆成功后跳转页面
         router.push('/')
       })

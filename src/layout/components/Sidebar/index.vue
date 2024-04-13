@@ -17,13 +17,20 @@ export default defineComponent({
       return (
         <div>
           <div class="logo-container">
-            <el-avatar
+            {/* <el-avatar
               size={vm.data.logoHeight}
               shape="square"
-              src="https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png"
+              src="../../../assets/panda.svg"
+            /> */}
+            <svg-icon
+              style={{
+                fontSize: vm.data.logoHeight + 'px',
+                background: '#f74'
+              }}
+              icon="panda"
             />
             {commonStore.sidebarOpened ? (
-              <h1 class="logo-title">imooc-admin</h1>
+              <h1 class="logo-title">yg-admin</h1>
             ) : (
               ''
             )}

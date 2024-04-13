@@ -19,7 +19,7 @@ NProgress.configure({
 })
 
 // * 私有路由表 需要结合用户权限
-const privateRoutes = [
+export const privateRoutes = [
   UserManageRouter,
   RoleListRouter,
   PermissionListRouter,
@@ -28,7 +28,7 @@ const privateRoutes = [
 ]
 
 // * 公开路由表
-const publicRoutes = [
+export const publicRoutes = [
   {
     path: '/login',
     component: () =>
@@ -68,7 +68,7 @@ const publicRoutes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [...publicRoutes, ...privateRoutes]
+  routes: publicRoutes
 })
 
 router.beforeEach((to, from, next) => {
@@ -80,5 +80,21 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   NProgress.done()
 })
+
+/**
+ * 初始化路由表
+ */
+// export function resetRouter() {
+//   if (
+//     store.getters.userInfo &&
+//     store.getters.userInfo.permission &&
+//     store.getters.userInfo.permission.menus
+//   ) {
+//     const menus = store.getters.userInfo.permission.menus
+//     menus.forEach((menu) => {
+//       router.removeRoute(menu)
+//     })
+//   }
+// }
 
 export default router
