@@ -25,7 +25,8 @@ export default defineComponent({
             <svg-icon
               style={{
                 fontSize: vm.data.logoHeight + 'px',
-                background: '#f74'
+                background: '#f74',
+                borderRadius: '5px'
               }}
               icon="panda"
             />
